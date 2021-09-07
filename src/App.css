@@ -1,38 +1,60 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.DmWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 920px;
+  height: 720px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px black;
+  background-image: linear-gradient(135deg, #cdcdcf, #6a6c6e),
+    linear-gradient(110deg, #dfdfe1, #6a6c6e);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Interface Grid Container */
+.Interface {
+  display: grid;
+  grid-template-columns: 5fr 5fr 5fr 3fr;
+  grid-template-rows: 1fr 4fr 4fr 4fr;
+  gap: 10px;
+  width: 900px;
+  height: 680px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Header {
+  grid-column: 1 / 5;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 50px;
+  padding: 20px;
+  text-align: end;
 }
 
-.App-link {
-  color: #61dafb;
+.Pad {
+  height: 200px;
+  width: 240px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgb(36, 36, 36);
+  background-color: rgb(34, 34, 34);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Controls {
+  grid-column: 4;
+  grid-row: 2 / 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgb(54, 54, 54);
+
+  background-color: rgb(71, 71, 71);
 }
