@@ -16,6 +16,8 @@ Here's a photo of the original pad:
 
 ![Roland Octopad Drum Pad](https://electricdenimstudios.com/wp-content/uploads/2016/01/Roland-Octapad-Pad-8-1.jpg)
 
+I have based the form factor round a iPad / tablet with the idea that a tablet shares some of the characteristics of an imput pad like this. I will alo have alternative screen size resets for common smarphone and larger screens. 
+
 ## Technologies Used
 
 This is primarily a React project. At this stage, the state is handled by React only. 
