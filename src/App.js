@@ -1,15 +1,61 @@
+import React from 'react';
 import './App.css';
 
 const padArr = [
-  {id: "Pad-1", triggerKey: "Q", icon: 'Kick'}, 
-  {id: "Pad-2", triggerKey: "W", icon: 'Snare'}, 
-  {id: "Pad-3", triggerKey: "E", icon: 'HiHat'}, 
-  {id: "Pad-4", triggerKey: "A", icon: 'Tom 1'}, 
-  {id: "Pad-5", triggerKey: "S", icon: 'Tom 2'}, 
-  {id: "Pad-6", triggerKey: "D", icon: 'Ride'}, 
-  {id: "Pad-7", triggerKey: "Z", icon: 'Crash'}, 
-  {id: "Pad-8", triggerKey: "X", icon: 'Floor Tom'}, 
-  {id: "Pad-9", triggerKey: "C", icon: 'Fill'} 
+  {id: "Pad-1",
+  triggerKey: "Q",
+  jskeycode: 81,
+  name: 'Crash',
+  icon: "",
+  url: "./02_drumloop_vinyl.mp3"},
+  {id: "Pad-2",
+  triggerKey: "W",
+  jskeycode: 87,
+  name: 'HiHat Open',
+  icon: "",
+  url: "./tama/hh_open.wav"},
+  {id: "Pad-3",
+  triggerKey: "E",
+  jskeycode: 69,
+  name: 'HiHat Closed',
+  icon: "",
+  url: "./tama/hh_closed_2.wav"},
+  {id: "Pad-4",
+  triggerKey: "A",
+  jskeycode: 65,
+  name: 'Tom 1',
+  icon: "",
+  url: "./tama/tom_8.wav"},
+  {id: "Pad-5",
+  triggerKey: "S",
+  jskeycode: 83,
+  name: 'Tom 2',
+  icon: "",
+  url: "./tama/tom_10.wav"},
+  {id: "Pad-6",
+  triggerKey: "D",
+  jskeycode: 68,
+  name: 'Snare',
+  icon: "",
+  url: "./tama/snare_1.wav"},
+  {id: "Pad-7",
+  triggerKey: "Z",
+  jskeycode: 90,
+  name: 'Kick',
+  icon: "",
+  url: "./tama/kick_1.wav"},
+  {id: "Pad-8",
+  triggerKey: "X",
+  jskeycode: 88,
+  name: 'Floor Tom',
+  icon: "",
+  url: "./tama/tom_13.wav"},
+  {id: "Pad-9",
+  triggerKey: "C",
+  jskeycode: 67,
+  name: 'Ride',
+  icon: "",
+  url: "./tama/ride.wav"} 
 ];
 
 function App() {
@@ -42,14 +88,28 @@ function Header (){
   )
 }
 
-function Pad (props) {
-  const arg = props.arg;
+class Pad extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = '';
+    
+    this.handleClick = this.handleClick.bind(this);
+  }
+  
+  handleClick(e) {
+    return document.getElementById('Q').play();
+  }
+  
+  render(){
+    const arg = this.props.arg;
   return (
-    <div className="Pad" id={arg.id}>
+    <div className="pad" id={arg.id} onClick={this.handleClick}>
       {/* <i className="padIcon">{arg.icon}</i> */}
       <p className="padTriggerKey">{arg.triggerKey}</p>
+      <audio className="patchSample" id={arg.triggerKey} src={arg.url} preload="auto"></audio>
     </div>
   )
+}
 }
 
 function Controls () {
