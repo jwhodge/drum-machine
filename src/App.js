@@ -7,55 +7,55 @@ const padArr = [
   jskeycode: 81,
   name: 'Crash',
   icon: "",
-  url: 'Heater-1.mp3'},
+  url: "/tama/crash_10.ogg"},
   {id: "Pad-2",
   triggerKey: "W",
   jskeycode: 87,
   name: 'HiHat Open',
   icon: "",
-  url: "tama/hh_open.wav"},
+  url: "/tama/hh_pedal.ogg"},
   {id: "Pad-3",
   triggerKey: "E",
   jskeycode: 69,
   name: 'HiHat Closed',
   icon: "",
-  url: "./tama/hh_closed_2.wav"},
+  url: "/tama/hh_closed_2.ogg"},
   {id: "Pad-4",
   triggerKey: "A",
   jskeycode: 65,
   name: 'Tom 1',
   icon: "",
-  url: "./tama/tom_8.wav"},
+  url: "/tama/tom_8.ogg"},
   {id: "Pad-5",
   triggerKey: "S",
   jskeycode: 83,
   name: 'Tom 2',
   icon: "",
-  url: "./tama/tom_10.wav"},
+  url: "/tama/tom_10.ogg"},
   {id: "Pad-6",
   triggerKey: "D",
   jskeycode: 68,
   name: 'Snare',
   icon: "",
-  url: "./tama/snare_1.wav"},
+  url: "/tama/snare_1.ogg"},
   {id: "Pad-7",
   triggerKey: "Z",
   jskeycode: 90,
   name: 'Kick',
   icon: "",
-  url: "./tama/kick_1.wav"},
+  url: "/tama/kick_1.ogg"},
   {id: "Pad-8",
   triggerKey: "X",
   jskeycode: 88,
   name: 'Floor Tom',
   icon: "",
-  url: "./tama/tom_13.wav"},
+  url: "/tama/tom_13.ogg"},
   {id: "Pad-9",
   triggerKey: "C",
   jskeycode: 67,
   name: 'Ride',
   icon: "",
-  url: "./tama/ride.wav"} 
+  url: "/tama/ride.ogg"} 
 ];
 
 function App() {
@@ -95,26 +95,38 @@ class Pad extends React.Component {
     
     this.triggerAudio = this.triggerAudio.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyOff = this.handleKeyOff.bind(this);
   }
   
   componentDidMount (){
     document.addEventListener('keydown', this.handleKeyPress);
+    document.addEventListener('keyup', this.handleKeyOff);
   }
   componentWillUnmount (){
     document.removeEventListener('keydown', this.handleKeyPress);
+    document.removeEventListener('keyup', this.handleKeyOff);
   }
 
   handleKeyPress (e){
     const arg = this.props.arg;
-    if (e.keyCode == arg.jskeycode) {
+    if (e.keyCode === arg.jskeycode) {
       this.triggerAudio();
     }
   }
   
+    handleKeyOff (e){
+    const arg = this.props.arg;
+    if (e.keyCode === arg.jskeycode) {
+    document.getElementById(arg.id).classList.remove('pad-active');
+    }
+  }
+
   triggerAudio() {
     const arg = this.props.arg;
-    const audio = document.getElementById(arg.triggerKey)
+    const audio = document.getElementById(arg.triggerKey);
+    audio.currentTime = 0;
     audio.play();
+    document.getElementById(arg.id).classList.add('pad-active');
   }
   
   render(){
