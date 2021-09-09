@@ -7,13 +7,13 @@ const padArr = [
   jskeycode: 81,
   name: 'Crash',
   icon: "",
-  url: "./02_drumloop_vinyl.mp3"},
+  url: 'Heater-1.mp3'},
   {id: "Pad-2",
   triggerKey: "W",
   jskeycode: 87,
   name: 'HiHat Open',
   icon: "",
-  url: "./tama/hh_open.wav"},
+  url: "tama/hh_open.wav"},
   {id: "Pad-3",
   triggerKey: "E",
   jskeycode: 69,
@@ -91,22 +91,41 @@ function Header (){
 class Pad extends React.Component {
   constructor(props) {
     super(props);
-    this.state = '';
+    this.state = {};
     
-    this.handleClick = this.handleClick.bind(this);
+    this.triggerAudio = this.triggerAudio.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   
-  handleClick(e) {
-    return document.getElementById('Q').play();
+  componentDidMount (){
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount (){
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress (e){
+    const arg = this.props.arg;
+    if (e.keyCode == arg.jskeycode) {
+      this.triggerAudio();
+    }
+  }
+  
+  triggerAudio() {
+    const arg = this.props.arg;
+    const audio = document.getElementById(arg.triggerKey)
+    audio.play();
   }
   
   render(){
     const arg = this.props.arg;
   return (
-    <div className="pad" id={arg.id} onClick={this.handleClick}>
+    <div className="pad" id={arg.id} onClick={this.triggerAudio}>
+      <audio id={arg.triggerKey}>
+      <source className="patchSample" src={arg.url} preload="auto" type="audio/wav"/>
+      </audio>
       {/* <i className="padIcon">{arg.icon}</i> */}
       <p className="padTriggerKey">{arg.triggerKey}</p>
-      <audio className="patchSample" id={arg.triggerKey} src={arg.url} preload="auto"></audio>
     </div>
   )
 }
