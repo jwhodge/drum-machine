@@ -8,13 +8,13 @@ html {
 *,
 *:before,
 *:after {
+  margin: 0;
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
 
 body {
-  margin: 0;
   font-family: "Rubik", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

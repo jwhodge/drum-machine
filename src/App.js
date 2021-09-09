@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faVolumeUp, faVolumeDown, faPowerOff } from '@fortawesome/free-solid-svg-icons'
+
 
 const padArr = [
   {id: "Pad-1",
@@ -127,6 +130,7 @@ class Pad extends React.Component {
     audio.currentTime = 0;
     audio.play();
     document.getElementById(arg.id).classList.add('pad-active');
+    document.getElementById("display").textContent=arg.name;
   }
   
   render(){
@@ -146,21 +150,41 @@ class Pad extends React.Component {
 function Controls () {
   return (
           <div className="Controls">
-            <div className="Logo">
-              <h3>Boland</h3>
-              <p>PAD-9</p>
+            <div className="logo">
+              <h2>Boland</h2>
+              <h3>PAD-9</h3>
             </div>
-            <div className="Display">
+            <div className="display">
               <p>DISPLAY</p>
+              <div id="display-screen">
+                <p className="display-info">Trad Kit</p>
+                <p className="display-info" id="display">---</p>
+              </div>
             </div>
-            <div className="Patch">
-              <p>PATCH</p>
+            <div className="patch" id="patch">
+              <p className="control-label">PATCH</p>
+              <div className="patch-button">
+                <p>1</p>
+              </div>
+              <div className="patch-button">
+                <p>2</p>
+              </div>
             </div>
-            <div className="Volume">
-              <p>VOLUME</p>
+            <div className="patch" id="volume">
+              <p className="control-label">VOLUME</p>
+              <div className="patch-button">
+                <FontAwesomeIcon icon={faVolumeUp} />
+              </div>
+              <div className="patch-button">
+                <FontAwesomeIcon icon={faVolumeDown} />
+              </div>
             </div>
-            <div className="Power">
-              <p>POWER</p>
+            <div className="patch" id="power">
+              <p className="control-label">POWER</p>
+              <div className="patch-button">
+                <FontAwesomeIcon icon={faPowerOff} />
+                
+              </div>
             </div>
           </div>
 
