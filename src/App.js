@@ -63,7 +63,7 @@ const padArr = [
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" id="drum-machine">
       <div className="DmWrapper">
         <div className="Interface">
           <Header />
@@ -98,23 +98,21 @@ class Pad extends React.Component {
     
     this.triggerAudio = this.triggerAudio.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
+  };
   
   componentDidMount (){
     document.addEventListener('keydown', this.handleKeyPress);
-    document.addEventListener('keyup', this.handleKeyOff);
-  }
+  };
   componentWillUnmount (){
     document.removeEventListener('keydown', this.handleKeyPress);
-    document.removeEventListener('keyup', this.handleKeyOff);
-  }
+  };
 
   handleKeyPress (e){
     const arg = this.props.arg;
     if (e.keyCode === arg.jskeycode) {
       this.triggerAudio();
     }
-  }
+  };
 
   triggerAudio() {
     const arg = this.props.arg;
@@ -126,27 +124,73 @@ class Pad extends React.Component {
     setTimeout(() => {
       document.getElementById(arg.id).classList.remove('pad-active');
     }, 101);
-  }
+  };
   
   render(){
     const arg = this.props.arg;
   return (
-    <div className="pad" id={arg.id} onClick={this.triggerAudio}>
-      <audio id={arg.triggerKey}>
-      <source className="patchSample" src={arg.url} preload="auto" type="audio/wav"/>
-      </audio>
-      {/* <i className="padIcon">{arg.icon}</i> */}
+    <div className="drum-pad" id={arg.id} onClick={this.triggerAudio} role="button">
+      <audio id={arg.triggerKey} className="clip" src={arg.url} preload="auto" type="audio/wav"/>
       <p className="padTriggerKey">{arg.triggerKey}</p>
     </div>
   )
-}
+};
 }
 
 /* refactor the controls for layout improvement */
 /* add functionality and event listeners */
 
-function Controls () {
-  return (
+class Controls extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      power: true,
+      volume: 0.8,
+    };
+    
+    this.togglePower = this.togglePower.bind(this);
+    this.handleVolumeClick = this.handleVolumeClick.bind(this);
+  };
+
+  handleVolumeClick (e){
+    const direction = {increase: 'up', decrease: 'down', upLimit: 0.9, lowLimit: 0.1, increment: 0.1};
+
+    function volumeSet (volAdj) {
+      const clips = [].slice.call(document.getElementsByClassName('clip'));
+      clips.forEach((level) => level.volume = volAdj);
+    };
+  
+    if (e.target.id === direction.increase && this.state.volume <= direction.upLimit) {
+      this.setState((state) => ({
+        volume: state.volume + direction.increment
+      }));
+      return volumeSet (this.state.volume);
+    }
+    else if (e.target.id === direction.decrease && this.state.volume >= direction.lowLimit) {
+      this.setState((state) => ({
+        volume: state.volume - direction.increment
+      }));
+      return volumeSet (this.state.volume);
+    }
+  };
+
+  togglePower () {
+    function volumeSet (volAdj) {
+      const clips = [].slice.call(document.getElementsByClassName('clip'));
+      clips.forEach((level) => level.volume = volAdj);
+    };
+    if (this.state.power === false) {
+      this.setState({power: true, volume: 0.8});
+    }
+    else {
+      this.setState({power: false, volume: 0})
+    }
+    console.log(this.state.power, this.state.volume);
+        return volumeSet (this.state.volume);
+  }
+
+  render (){
+    return (
           <div className="Controls">
             <div className="logo">
               <h2>Boland</h2>
@@ -155,39 +199,45 @@ function Controls () {
             <div className="display">
               <p>DISPLAY</p>
               <div id="display-screen">
-                <p className="display-info">Trad Kit</p>
+                <p className="display-info" id="kit">Trad Kit</p>
                 <p className="display-info" id="display">---</p>
+                <p className="display-info" id="level">Vol {Math.floor(this.state.volume * 10)}</p>
               </div>
             </div>
-            <div className="patch" id="patch">
-              <p className="control-label">PATCH</p>
-              <div className="patch-button">
-                <p>1</p>
-              </div>
-              <div className="patch-button">
-                <p>2</p>
-              </div>
-            </div>
+            <PatchManager />
+            {/* TODO Volume buttons don't operate if you click the fa icon */}
             <div className="patch" id="volume">
               <p className="control-label">VOLUME</p>
-              <div className="patch-button">
-                <FontAwesomeIcon icon={faVolumeUp} />
-              </div>
-              <div className="patch-button">
-                <FontAwesomeIcon icon={faVolumeDown} />
-              </div>
+              <button className="patch-button" id="up" onClick={this.handleVolumeClick}>
+                <FontAwesomeIcon icon={faVolumeUp}/>
+              </button>
+              <button className="patch-button" id="down" onClick={this.handleVolumeClick}>
+                <FontAwesomeIcon icon={faVolumeDown}/>
+              </button>
             </div>
             <div className="patch" id="power">
               <p className="control-label">POWER</p>
-              <div className="patch-button">
+              <button className="patch-button" onClick={this.togglePower}>
                 <FontAwesomeIcon icon={faPowerOff} />
-                
-              </div>
+              </button>
             </div>
           </div>
-
-  )
+    );
+  };
 }
 
+function PatchManager () {
+  return (
+  <div className="patch" id="patch">
+              <p className="control-label">PATCH</p>
+              <button className="patch-button">
+                <p>1</p>
+              </button>
+              <button className="patch-button">
+                <p>2</p>
+              </button>
+            </div>
+  )
+}
 
 export default App;
