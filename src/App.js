@@ -98,7 +98,6 @@ class Pad extends React.Component {
     
     this.triggerAudio = this.triggerAudio.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleKeyOff = this.handleKeyOff.bind(this);
   }
   
   componentDidMount (){
@@ -116,13 +115,6 @@ class Pad extends React.Component {
       this.triggerAudio();
     }
   }
-  
-    handleKeyOff (e){
-    const arg = this.props.arg;
-    if (e.keyCode === arg.jskeycode) {
-    document.getElementById(arg.id).classList.remove('pad-active');
-    }
-  }
 
   triggerAudio() {
     const arg = this.props.arg;
@@ -131,6 +123,9 @@ class Pad extends React.Component {
     audio.play();
     document.getElementById(arg.id).classList.add('pad-active');
     document.getElementById("display").textContent=arg.name;
+    setTimeout(() => {
+      document.getElementById(arg.id).classList.remove('pad-active');
+    }, 101);
   }
   
   render(){
@@ -146,6 +141,9 @@ class Pad extends React.Component {
   )
 }
 }
+
+/* refactor the controls for layout improvement */
+/* add functionality and event listeners */
 
 function Controls () {
   return (
