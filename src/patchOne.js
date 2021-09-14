@@ -1,4 +1,4 @@
-const padArr = [
+const patchOne = [
   {id: "Pad-1",
   triggerKey: "Q",
   jskeycode: 81,
@@ -54,3 +54,4 @@ const padArr = [
   icon: "",
   url: "/tama/ride.ogg"} 
 ];
+
