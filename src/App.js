@@ -150,12 +150,12 @@ class App extends React.Component {
   handleVolumeClick (e){
     const direction = {increase: 'up', decrease: 'down', upLimit: 0.9, lowLimit: 0.1, increment: 0.1};
   
-    if (e.target.id === direction.increase && this.state.volume <= direction.upLimit) {
+    if (e.currentTarget.id === direction.increase && this.state.volume <= direction.upLimit) {
       this.setState((state) => ({
         volume: state.volume + direction.increment
       }));
     }
-    else if (e.target.id === direction.decrease && this.state.volume >= direction.lowLimit) {
+    else if (e.currentTarget.id === direction.decrease && this.state.volume >= direction.lowLimit) {
       this.setState((state) => ({
         volume: state.volume - direction.increment
       }));
@@ -195,7 +195,6 @@ class App extends React.Component {
           <Pad arg={this.state.patch[7]} pow={this.state.power}/>
           <Pad arg={this.state.patch[8]} pow={this.state.power}/>
 {/*<Controls /> */}
-{/* add functionality and event listeners */}
           <div className="Controls">
             <div className="logo">
               <h2>Boland</h2>
@@ -212,13 +211,12 @@ class App extends React.Component {
             <div className="patch" id="patch">
               <p className="control-label">PATCH</p>
               <button className="patch-button" id="trad" onClick={this.patchManager}>
-                <p>TRAD</p>
+                TRAD
               </button>
               <button className="patch-button" id="tr808" onClick={this.patchManager}>
-                <p>808</p>
+                808
               </button>
             </div>
-            {/* TODO Volume buttons don't operate if you click the fa icon */}
             <div className="patch" id="volume">
               <p className="control-label">VOLUME</p>
               <button className="patch-button" id="up" onClick={this.handleVolumeClick}>
