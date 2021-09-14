@@ -157,3 +157,83 @@
   border-radius: 7px;
   box-shadow: 3px 3px 5px rgb(36, 36, 36);
 }
+
+@media only screen and (max-width: 940px) {
+  .DmWrapper {
+    grid-template-columns: 3fr 3fr 3fr 5fr;
+    gap: 5px;
+    width: 700px;
+    height: 360px;
+  }
+
+  .Interface {
+    width: 680px;
+    height: 350px;
+  }
+
+  .Header {
+    height: 10px;
+    padding: 10px;
+    font-size: small;
+  }
+
+  .drum-pad {
+    height: 90px;
+    width: 140px;
+  }
+
+  .Controls {
+    width: 200px;
+    font-size: small;
+    padding: 3px;
+    margin-bottom: 5px;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10%;
+  }
+
+  .control-label {
+    margin-bottom: 2px;
+  }
+
+  .patch-button {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-height: 1350px) {
+  .DmWrapper {
+    width: 1610px;
+    height: 1260px;
+    font-size: x-large;
+  }
+
+  .Interface {
+    width: 1550px;
+    height: 1200px;
+  }
+
+  .Header {
+    height: 80px;
+    font-size: larger;
+  }
+
+  .drum-pad {
+    height: 350px;
+    width: 420px;
+  }
+
+  .Controls {
+    margin-bottom: 4%;
+  }
+
+  .patch-button {
+    width: 100px;
+    height: 100px;
+  }
+}
