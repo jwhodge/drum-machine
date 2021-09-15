@@ -1,6 +1,6 @@
 # FCC Drum Machine App
 
-### Link to live app - currently non-functional
+### [Link to live app](https://jwhodge.github.io/drum-machine/)
 
 The aim is to build a functioning set of drum pads that trigger a series of attached audio samples on click or with a keystroke. 
 
