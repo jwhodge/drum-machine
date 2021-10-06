@@ -1,10 +1,10 @@
 # FCC Drum Machine App
 
+![Drum Machine](https://raw.githubusercontent.com/jwhodge/drum-machine/master/drum-machine.png)
+
 ### [Link to live app](https://jwhodge.github.io/drum-machine/)
 
 The aim is to build a functioning set of drum pads that trigger a series of attached audio samples on click or with a keystroke. 
-
-This is a freeCodeCamp assignment project. The brief is here: [Drum Machine Project Brief](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-drum-machine)
 
 ## Design Inspiration
 
@@ -28,6 +28,10 @@ I chose to avoid using a framework or pre-processor although I may later go to S
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## freeCodeCamp
 
+This is a freeCodeCamp assignment project. The brief is here: [Drum Machine Project Brief](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-drum-machine)
+
+![Tests Passing](https://raw.githubusercontent.com/jwhodge/drum-machine/master/dm-tests-passing.png)
 
 
